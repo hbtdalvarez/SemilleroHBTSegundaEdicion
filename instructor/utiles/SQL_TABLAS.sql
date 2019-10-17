@@ -33,3 +33,14 @@ comment on column COMIC.CANTIDAD is 'Cantidad de comics en inventario disponible
 
 --Notas a tener en cuenta
 --SC indica el prefijo de la tabla S=semillero, C=comic
+--Borrar la estructura de la tabla: drop table "DB_SEMILLERO"."COMIC";
+--Ver estructura de la tabla: desc DB_SEMILLERO"."COMIC;
+--Consultar los datos de una tabla completa: select * from COMIC
+
+--Como insertar datos:
+insert into COMIC (SCID,SCNOMBRE, SCEDITORIAL, SCTEMATICA, SCCOLECCION,SCNUMEROPAGINAS,SCPRECIO,SCAUTORES,SCCOLOR,SCFECHA_VENTA,SCESTADO,SCCANTIDAD)
+values (1,'Dragon Ball Yamcha','Planeta Cómic','AVENTURAS','Manga Shonen',144,2100,'Dragon Garow Lee',0,sysdate,'ACTIVO',20);
+insert into COMIC (SCID,SCNOMBRE, SCEDITORIAL, SCTEMATICA, SCCOLECCION,SCNUMEROPAGINAS,SCPRECIO,SCAUTORES,SCCOLOR,SCFECHA_VENTA,SCESTADO,SCCANTIDAD)
+values (2,'Captain America Corps 1-5 USA','Panini Comics ','FANTASTICO','BIBLIOTECA MARVEL ',128,5000,'Phillippe Briones, Roger Stern ',0,sysdate,'ACTIVO',5);
+insert into COMIC (SCID,SCNOMBRE, SCEDITORIAL, SCTEMATICA, SCCOLECCION,SCNUMEROPAGINAS,SCPRECIO,SCAUTORES,SCCOLOR,SCFECHA_VENTA,SCESTADO,SCCANTIDAD)
+values (3,'The Spectacular Spider-Man v2 USA','Panini Comics ','FANTASTICO','MARVEL COMICS',208,6225,'Straczynski,Deodato Jr.,Barnes,Eaton',1,sysdate,'INACTIVO',0);
