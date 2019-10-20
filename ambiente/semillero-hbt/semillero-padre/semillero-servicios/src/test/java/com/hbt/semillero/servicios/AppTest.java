@@ -1,20 +1,25 @@
 package com.hbt.semillero.servicios;
 
-import static org.junit.Assert.assertTrue;
-
-import org.junit.Test;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 /**
- * Unit test for simple App.
+ * Test unitario del semillero HBT
+ * @author ccastano
+ *
  */
 public class AppTest 
 {
-    /**
-     * Rigorous Test :-)
-     */
+    
+	/**
+	 * Metodo que permite validar si dada la suma de dos numero el resultado es el correcto
+	 */
     @Test
-    public void shouldAnswerWithTrue()
-    {
-        assertTrue( true );
+    public void primeraPU(){
+    	Long resultadoEsperado=2159L;
+    	Long sumando1= 1500L;
+    	Long sumando2=659L;
+    	Long resultado=sumando1 + sumando2;
+        Assert.assertEquals(resultado, resultadoEsperado);
     }
 }
