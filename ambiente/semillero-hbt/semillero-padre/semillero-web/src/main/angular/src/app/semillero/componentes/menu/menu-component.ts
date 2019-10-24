@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 /**
- * @description Componenete gestionar comic, el cual contiene la logica CRUD
+ * @description Componente menu, el cual contiene la logica para direccionar a los modulos
+ * desarrollados
  * 
  * @author Diego Fernando Alvarez Silva <dalvarez@heinsohn.com.co>
  */
@@ -11,16 +12,39 @@ import { Router } from '@angular/router';
   templateUrl: './menu-component.html',
 })
 export class MenuComponent implements OnInit {
-    
-    constructor(private router : Router) {
 
-    }  
+  /**
+   * Constructor de la clase
+   * @param router permite direccionar a otros componentes
+   */
+  constructor(private router: Router) {
 
-    ngOnInit(): void {
-        
-    }
-  
-    public navegarGestionarComic() : void {
-      this.router.navigate(['gestionar-comic']);
-    }
+  }
+
+  /**
+   * Evento angular que se ejecuta al iniciar el componente
+   */
+  ngOnInit(): void {
+
+  }
+
+  /**
+   * @description Metodo encargado de direccionar al componente de gestionar comic
+   * @author Diego Fernando Alvarez Silva <dalvarez@heinsohn.com.co>
+   */
+  public navegarGestionarComic(): void {
+    this.router.navigate(['gestionar-comic']);
+  }
+
+  /**
+   * @description Metodo encargado de direccionar al componente de gestionar comic
+   * @author Diego Fernando Alvarez Silva <dalvarez@heinsohn.com.co>
+   */
+  public navegarHome(): void {
+    this.router.navigate(['bienvenida']);
+  }
+
+  public navegarGestionarCompra(): void {
+    //WIP
+  }
 }

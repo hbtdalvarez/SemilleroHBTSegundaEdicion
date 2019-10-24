@@ -7,18 +7,18 @@ import { ComicDTO } from '../../dto/comic.dto';
  * @author Diego Fernando Alvarez Silva <dalvarez@heinsohn.com.co>
  */
 @Component({
-  selector: 'gestionar-comic',
-  templateUrl: './gestionar-comic.html',
-  styleUrls: ['./gestionar-comic.css']
+    selector: 'gestionar-comic',
+    templateUrl: './gestionar-comic.html',
+    styleUrls: ['./gestionar-comic.css']
 })
 export class GestionarComicComponent implements OnInit {
-    
+
     /**
      * Atributo que contendra la informacion del comic
      */
-    public comic : ComicDTO;
-    
-    constructor() {}
+    public comic: ComicDTO;
+
+    constructor() { }
 
     /**
      * Evento angular que se ejecuta al invocar el componente
@@ -30,5 +30,5 @@ export class GestionarComicComponent implements OnInit {
         this.comic.color = true;
         this.comic.numeroPaginas = 100;
     }
-  
+
 }

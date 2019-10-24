@@ -8,7 +8,9 @@ import { AppComponent } from './app.component';
 import { APP_BASE_HREF } from '@angular/common';
 import { GestionarComicComponent } from './semillero/componentes/gestionarComic/gestionar-comic';
 import { MenuComponent } from './semillero/componentes/menu/menu-component';
+import { BienvenidaComponent } from './semillero/componentes/home/bienvenida-component';
 
+// DTOs
 export { ComicDTO } from './semillero/dto/comic.dto';
 export { ResultadoDTO } from './semillero/dto/resultado.dto';
 
@@ -16,6 +18,7 @@ export { ResultadoDTO } from './semillero/dto/resultado.dto';
   declarations: [
     AppComponent,
     MenuComponent,
+    BienvenidaComponent,
     GestionarComicComponent
   ],
   imports: [

@@ -9,18 +9,18 @@
 
                 <!-- Header -->
                 <header id="header">
-                    <a href="index.html" class="logo"><strong>Bienvenidos</strong> semillero 2019 Heinsohn</a>
+                    <a class="logo"><strong>Bienvenidos</strong> semillero 2019 Heinsohn</a>
                     <ul class="icons">
-                        <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-                        <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-                        <li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a>
-                        </li>
-                        <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>                        
+                        <li><a href="https://twitter.com/HeinsohnSabe" class="icon brands fa-twitter"><span
+                                    class="label">Twitter</span></a></li>
+                        <li><a href="https://www.facebook.com/HeinsohnSabe/" class="icon brands fa-facebook-f"><span
+                                    class="label">Facebook</span></a></li>
+                        <li><a href="https://www.instagram.com/heinsohn.co/" class="icon brands fa-instagram"><span
+                                    class="label">Instagram</span></a></li>
                     </ul>
                 </header>
 
                 <section>
-                    <img src="https://www.elempleo.com/sitios-empresariales/colombia/heinsohn-business-technology/img/elempleo-02.jpg" height="350" width="700">
                     <router-outlet></router-outlet>
                 </section>
             </div>
@@ -43,32 +43,19 @@
                         <h2>Menu</h2>
                     </header>
                     <ul>
+                        <li><a (click)="navegarHome()">Home</a></li>
                         <li><a (click)="navegarGestionarComic()">Gestionar Comic</a></li>
-                        <li><a href="generic.html">Generic</a></li>
-                        <li><a href="elements.html">Elements</a></li>
-                        <li>
-                            <span class="opener">Submenu</span>
-                            <ul>
-                                <li><a href="#">Lorem Dolor</a></li>
-                                <li><a href="#">Ipsum Adipiscing</a></li>
-                                <li><a href="#">Tempus Magna</a></li>
-                                <li><a href="#">Feugiat Veroeros</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Etiam Dolore</a></li>
-                        <li><a href="#">Adipiscing</a></li>
-                        <li>
-                            <span class="opener">Another Submenu</span>
-                            <ul>
-                                <li><a href="#">Lorem Dolor</a></li>
-                                <li><a href="#">Ipsum Adipiscing</a></li>
-                                <li><a href="#">Tempus Magna</a></li>
-                                <li><a href="#">Feugiat Veroeros</a></li>
-                            </ul>
-                        </li>
+                        <li><a (click)="navegarGestionarCompra()">Gestionar compra comic</a></li>
                     </ul>
                 </nav>
-
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
                 <!-- Footer -->
                 <footer id="footer">
                     <p class="copyright">&copy; Untitled. All rights reserved. Demo Images: <a
