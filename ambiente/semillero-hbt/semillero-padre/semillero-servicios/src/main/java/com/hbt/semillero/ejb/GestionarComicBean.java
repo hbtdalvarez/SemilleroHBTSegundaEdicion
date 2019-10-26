@@ -23,7 +23,7 @@ import com.hbt.semillero.entidad.Comic;
 public class GestionarComicBean implements IGestionarComicLocal {
 
 	/**
-	 * Atributo em que se usa para interacturar con el contexto de persistencia..
+	 * Atributo em que se usa para interacturar con el contexto de persistencia.
 	 */
 	@PersistenceContext
 	private EntityManager em;
@@ -36,8 +36,10 @@ public class GestionarComicBean implements IGestionarComicLocal {
 	 *
 	 */
 	public void crearComic(ComicDTO comicNuevo) {
+		//Entidad nueva 
 		Comic comic = new Comic();
 		comic.setId(comicNuevo.getId());
+		//Se almacena la informacion y se maneja la enidad comic
 		em.persist(comicNuevo);
 	}
 
@@ -77,6 +79,7 @@ public class GestionarComicBean implements IGestionarComicLocal {
 
 		ComicDTO comicDTO = new ComicDTO();
 		comicDTO.setId(comic.getId());
+		comicDTO.setNombre(comic.getNombre());
 		return comicDTO;
 	}
 

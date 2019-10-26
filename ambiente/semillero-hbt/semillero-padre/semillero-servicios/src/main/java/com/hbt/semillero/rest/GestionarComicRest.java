@@ -46,7 +46,7 @@ public class GestionarComicRest {
 	/**
 	 * 
 	 * Metodo encargado de traer la informacion de un comic determiando
-	 * 
+	 * http://localhost:8085/semillero-servicios/rest/GestionarComic/consultar?idComic=1
 	 * @param idComic
 	 * @return
 	 */
