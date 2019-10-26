@@ -32,6 +32,20 @@ public class GestionarComicRest {
 	/**
 	 * 
 	 * Metodo encargado de traer la informacion de un comic determiando
+	 * http://localhost:8085/semillero-servicios/rest/GestionarComic/saludo
+	 * @param idComic
+	 * @return
+	 */
+	@GET
+	@Path("/saludo")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String primerRest() {
+		return "Prueba inicial servicios rest en el semillero - Hola Semillero";
+	}
+
+	/**
+	 * 
+	 * Metodo encargado de traer la informacion de un comic determiando
 	 * 
 	 * @param idComic
 	 * @return

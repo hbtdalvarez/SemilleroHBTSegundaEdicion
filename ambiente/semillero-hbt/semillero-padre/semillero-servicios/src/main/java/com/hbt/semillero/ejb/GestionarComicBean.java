@@ -3,6 +3,8 @@
  */
 package com.hbt.semillero.ejb;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -76,6 +78,13 @@ public class GestionarComicBean implements IGestionarComicLocal {
 		ComicDTO comicDTO = new ComicDTO();
 		comicDTO.setId(comic.getId());
 		return comicDTO;
+	}
+
+	// Sobreescribir un metod, sobrecargar
+	public List<ComicDTO> consultarComic() {
+
+		List<Comic> resultados = (List<Comic>) em.createQuery("select c from Comic").getResultList();
+		return null;
 	}
 
 }

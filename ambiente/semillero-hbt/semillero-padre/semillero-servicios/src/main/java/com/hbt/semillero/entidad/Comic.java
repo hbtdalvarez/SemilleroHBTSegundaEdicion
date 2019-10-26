@@ -3,36 +3,49 @@
  */
 package com.hbt.semillero.entidad;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
  * <b>Descripción:<b> Clase que determina la entidad que permite representar la
- * tabla "Semillero.comic"
+ * tabla "DB_SEMILLERO"."COMIC"
  * 
  * @author ccastano
  * @version
  */
 @Entity
 @Table(name = "COMIC")
-public class Comic {
+public class Comic implements Serializable {
 
+	/**
+	 * Serializar es pasar un Objeto a un array de bytes y viceversa. Atributo que
+	 * determina serialVersionUID es el id único que identifica una clase cuando lo
+	 * serializamos. ;ediante este id podemos identificar el objeto convertido en un
+	 * array de bytes.
+	 */
+	private static final long serialVersionUID = 1L;
 	private String id;
 	private String nombre;
 	private String editorial;
-	private String tematica;
+	private TematicaEnum tematicaEnum;
 	private String coleccion;
 	private Integer numeroPaginas;
 	private BigDecimal precio;
 	private String autores;
 	private Boolean color;
 	private LocalDate fechaVenta;
-	private String estado;
+	private EstadoEnum estadoEnum;
 	private Long cantidad;
 
 	/**
@@ -48,6 +61,8 @@ public class Comic {
 	 * @return El id asociado a la clase
 	 */
 	@Id
+	@SequenceGenerator(allocationSize = 1, name = "COMIC_SCID_GENERATOR", sequenceName = "SEQ_COMIC")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "COMIC_SCID_GENERATOR")
 	@Column(name = "SCID")
 	public String getId() {
 		return id;
@@ -106,8 +121,9 @@ public class Comic {
 	 * @return El tematica asociado a la clase
 	 */
 	@Column(name = "SCTEMATICA")
-	public String getTematica() {
-		return tematica;
+	@Enumerated(value = EnumType.STRING)
+	public TematicaEnum getTematicaEnum() {
+		return tematicaEnum;
 	}
 
 	/**
@@ -115,8 +131,8 @@ public class Comic {
 	 * 
 	 * @param tematica El nuevo tematica a modificar.
 	 */
-	public void setTematica(String tematica) {
-		this.tematica = tematica;
+	public void setTematicaEnum(TematicaEnum tematicaEnum) {
+		this.tematicaEnum = tematicaEnum;
 	}
 
 	/**
@@ -239,8 +255,9 @@ public class Comic {
 	 * @return El estado asociado a la clase
 	 */
 	@Column(name = "SCESTADO")
-	public String getEstado() {
-		return estado;
+	@Enumerated(value = EnumType.STRING)
+	public EstadoEnum getEstadoEnum() {
+		return estadoEnum;
 	}
 
 	/**
@@ -248,8 +265,8 @@ public class Comic {
 	 * 
 	 * @param estado El nuevo estado a modificar.
 	 */
-	public void setEstado(String estado) {
-		this.estado = estado;
+	public void setEstadoEnum(EstadoEnum estadoEnum) {
+		this.estadoEnum = estadoEnum;
 	}
 
 	/**
@@ -277,9 +294,9 @@ public class Comic {
 	 */
 	@Override
 	public String toString() {
-		return "Comic [id=" + id + ", nombre=" + nombre + ", editorial=" + editorial + ", tematica=" + tematica
+		return "Comic [id=" + id + ", nombre=" + nombre + ", editorial=" + editorial + ", tematica=" + tematicaEnum
 				+ ", coleccion=" + coleccion + ", numeroPaginas=" + numeroPaginas + ", precio=" + precio + ", autores="
-				+ autores + ", color=" + color + ", fechaVenta=" + fechaVenta + ", estado=" + estado + ", cantidad="
+				+ autores + ", color=" + color + ", fechaVenta=" + fechaVenta + ", estado=" + estadoEnum + ", cantidad="
 				+ cantidad + "]";
 	}
 
@@ -299,13 +316,13 @@ public class Comic {
 		result = prime * result + ((coleccion == null) ? 0 : coleccion.hashCode());
 		result = prime * result + ((color == null) ? 0 : color.hashCode());
 		result = prime * result + ((editorial == null) ? 0 : editorial.hashCode());
-		result = prime * result + ((estado == null) ? 0 : estado.hashCode());
+		result = prime * result + ((estadoEnum == null) ? 0 : estadoEnum.hashCode());
 		result = prime * result + ((fechaVenta == null) ? 0 : fechaVenta.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
 		result = prime * result + ((numeroPaginas == null) ? 0 : numeroPaginas.hashCode());
 		result = prime * result + ((precio == null) ? 0 : precio.hashCode());
-		result = prime * result + ((tematica == null) ? 0 : tematica.hashCode());
+		result = prime * result + ((tematicaEnum == null) ? 0 : tematicaEnum.hashCode());
 		return result;
 	}
 
@@ -347,10 +364,10 @@ public class Comic {
 				return false;
 		} else if (!editorial.equals(other.editorial))
 			return false;
-		if (estado == null) {
-			if (other.estado != null)
+		if (estadoEnum == null) {
+			if (other.estadoEnum != null)
 				return false;
-		} else if (!estado.equals(other.estado))
+		} else if (!estadoEnum.equals(other.estadoEnum))
 			return false;
 		if (fechaVenta == null) {
 			if (other.fechaVenta != null)
@@ -377,10 +394,10 @@ public class Comic {
 				return false;
 		} else if (!precio.equals(other.precio))
 			return false;
-		if (tematica == null) {
-			if (other.tematica != null)
+		if (tematicaEnum == null) {
+			if (other.tematicaEnum != null)
 				return false;
-		} else if (!tematica.equals(other.tematica))
+		} else if (!tematicaEnum.equals(other.tematicaEnum))
 			return false;
 		return true;
 	}
