@@ -25,31 +25,7 @@ export class GestionarComicComponent implements OnInit {
      */
     ngOnInit(): void {
         this.comic = new ComicDTO();
-        this.comic.id = "1";
-        this.comic.cantidad = 11;
-        this.comic.color = true;
-        this.comic.numeroPaginas = 100;
         
-        let lista2 : Array<any> = [1,2,3];
-
-        let lista = [1,2,3];
-        lista.map(resultado => {
-            console.log(resultado);
-        })
-
-        lista2.forEach(element => {
-            console.log(element);
-        });
-
-        for (let i = 0; i < lista.length; i++) {
-            const element = lista[i];
-            console.log(element);
-            
-        }
-        let resultado = true ? 'verdadero' : 'false';
-        let mapa : Map<number,string> = new Map<number,string>();
-        mapa.set(1,"uno");
-        mapa.get(1);
     }
 
 }

@@ -1,3 +1,113 @@
-gestionar comic
+<div class="container">
+    <form>
+        <h1>Gestionar Comic</h1>
+        <hr>
 
-<pre>{{ comic | json }}</pre>
+        <div class="row">
+            <div class="col-6">
+                <label for="nombreComic">Nombre:</label>
+                <input type="text" class="form-control" id="nombreComic" name="nombre" [(ngModel)]="comic.nombre">
+            </div>
+
+            <div class="col-6">
+                <label for="editorialComic">Editorial:</label>
+                <input type="text" class="form-control" id="editorialComic">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="tematica">Tematica:</label>
+                    <select class="form-control" id="tematica">
+                        <option value="AVENTURAS">AVENTURAS</option>
+                        <option value="BELICO">BELICO</option>
+                        <option value="DEPORTIVO">DEPORTIVO</option>
+                        <option value="FANTASTICO">FANTASTICO</option>
+                        <option value="CIENCIA_FICCION">CIENCIA FICCION</option>
+                        <option value="HISTORICO">HISTORICO</option>
+                        <option value="HORROR">HORROR</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-6">
+                <label for="coleccion">Coleccion:</label>
+                <input type="text" class="form-control" id="coleccion">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <label for="numeroPaginas">Número paginas:</label>
+                <input type="number" class="form-control" id="numeroPaginas">
+            </div>
+
+            <div class="col-6">
+                <label for="precio">Precio:</label>
+                <input type="number" class="form-control" id="precio" step=".01">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <label for="autores">Autores:</label>
+                <textarea class="form-control" id="autores" rows="3"></textarea>
+            </div>
+
+            <div class="col-6">
+                <label for="color">A color:</label>
+                <br>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadioInline1">Si</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadioInline2">No</label>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-6">
+                <span></span>
+            </div>
+            <div class="col-6 text-right">
+                <button type="button" class="btn btn-primary">Crear/Editar</button>
+            </div>
+        </div>
+
+        <br>
+        <div class="row">
+            <div class="col-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Tematica</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">A color</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Batman</td>
+                            <td>Horror</td>
+                            <td>65000</td>
+                            <td>Si</td>
+                            <td>
+                                <i class="fas fa-search 2x ml-1" title="Consultar"></i>
+                                <i class="fas fa-pencil-alt 2x ml-1" title="Editar"></i>
+                                <i class="far fa-times-circle 2x ml-1" title="Eliminar"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </form>
+
+</div>

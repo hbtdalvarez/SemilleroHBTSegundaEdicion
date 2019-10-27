@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { HttpModule} from '@angular/http';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -26,6 +27,7 @@ export { ResultadoDTO } from './semillero/dto/resultado.dto';
     AppRoutingModule,
     HttpModule,
     HttpClientModule,
+    FormsModule
     
   ],
   providers: [
