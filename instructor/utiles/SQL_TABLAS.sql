@@ -28,7 +28,7 @@ comment on column COMIC.SCCOLOR is 'Define si el comic es a color o no, campo de
 comment on column COMIC.SCFECHA_VENTA is 'Fecha de inicio de la venta del comic';
 comment on column COMIC.SCESTADO is 'Define si el comic tiene existencia para la venta o no' ;
 comment on column COMIC.SCCANTIDAD is 'Cantidad de comics en inventario disponibles para la venta';
-comment on column COMIC.SCID is 'Identificador unico del commic';
+comment on column COMIC.SCID is 'Identificador unico del comic';
 
 --Notas a tener en cuenta
 --SC indica el prefijo de la tabla S=semillero, C=comic
@@ -40,10 +40,18 @@ comment on column COMIC.SCID is 'Identificador unico del commic';
 --confirmar los cambios: commit
 --devolver los cambios: rollback
 
+--Crear una secuencia para utilizarla como incremento del identificador
+CREATE SEQUENCE "DB_SEMILLERO"."SEQ_COMIC" MINVALUE 1 START WITH 1  INCREMENT BY 1 NOCACHE;
+
+--Asi obtenemos el siguiente valor: SELECT "DB_SEMILLERO"."SEQ_COMIC".nextval FROM DUAL;
+--Tambien podemos obtener el valor actual: SELECT "DB_SEMILLERO"."SEQ_COMIC".CURRVAL FROM DUAL;
+
 --Como insertar datos:
 insert into COMIC (SCID,SCNOMBRE, SCEDITORIAL, SCTEMATICA, SCCOLECCION,SCNUMEROPAGINAS,SCPRECIO,SCAUTORES,SCCOLOR,SCFECHA_VENTA,SCESTADO,SCCANTIDAD)
-values (1,'Dragon Ball Yamcha','Planeta CÃ³mic','AVENTURAS','Manga Shonen',144,2100,'Dragon Garow Lee',0,sysdate,'ACTIVO',20);
+values (DB_SEMILLERO.SEQ_COMIC.nextval,'Dragon Ball Yamcha','Planeta Cómic','AVENTURAS','Manga Shonen',144,2100,'Dragon Garow Lee',0,sysdate,'ACTIVO',20);
 insert into COMIC (SCID,SCNOMBRE, SCEDITORIAL, SCTEMATICA, SCCOLECCION,SCNUMEROPAGINAS,SCPRECIO,SCAUTORES,SCCOLOR,SCFECHA_VENTA,SCESTADO,SCCANTIDAD)
-values (2,'Captain America Corps 1-5 USA','Panini Comics ','FANTASTICO','BIBLIOTECA MARVEL ',128,5000,'Phillippe Briones, Roger Stern ',0,sysdate,'ACTIVO',5);
+values (SEQ_COMIC.nextval,'Captain America Corps 1-5 USA','Panini Comics ','FANTASTICO','BIBLIOTECA MARVEL ',128,5000,'Phillippe Briones, Roger Stern ',0,sysdate,'ACTIVO',5);
 insert into COMIC (SCID,SCNOMBRE, SCEDITORIAL, SCTEMATICA, SCCOLECCION,SCNUMEROPAGINAS,SCPRECIO,SCAUTORES,SCCOLOR,SCFECHA_VENTA,SCESTADO,SCCANTIDAD)
-values (1,'The Spectacular Spider-Man v2 USA','Panini Comics ','FANTASTICO','MARVEL COMICS',208,6225,'Straczynski,Deodato Jr.,Barnes,Eaton',1,sysdate,'INACTIVO',0);
+values (SEQ_COMIC.nextval,'The Spectacular Spider-Man v2 USA','Panini Comics ','FANTASTICO','MARVEL COMICS',208,6225,'Straczynski,Deodato Jr.,Barnes,Eaton',1,sysdate,'INACTIVO',0);
+
+select * from COMIC;

@@ -19,6 +19,7 @@ public enum TematicaEnum {
 	CIENCIA_FICCION("enum.tematica.cienciaficcion"),  
 	HISTORICO("enum.tematica.historico"),  
 	HORROR("enum.tematica.horror");
+	
 	/**
 	 * Atributo que contiene la clave del mensaje para la internacionalizacion
 	 */
