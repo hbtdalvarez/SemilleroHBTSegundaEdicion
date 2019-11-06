@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.hbt.semillero.dto.ComicDTO;
+import com.hbt.semillero.entidad.EstadoEnum;
+import com.hbt.semillero.entidad.TematicaEnum;
 
 /**
  * <b>Descripción:<b> Clase que determina el uso de metodos para manipular
@@ -34,24 +36,28 @@ public class GestionarComicPOJO {
 	 *
 	 */
 	public void crearComicDTO() {
+		// Se crea e instancia un objeto de tipo ComicDTO
 		ComicDTO comic = new ComicDTO();
+		TematicaEnum aventuras = TematicaEnum.AVENTURAS;
 		comic.setId("100");
 		comic.setNombre("EL EJÉRCITO DEL CAPITÁN AMÉRICA");
 		comic.setEditorial("Panini Comics ");
-		comic.setTematica("Aventura");
+		comic.setTematicaEnum(aventuras);
 		comic.setColeccion("BIBLIOTECA MARVEL ");
 		comic.setNumeroPaginas(128);
 		comic.setPrecio(new BigDecimal(50));
 		comic.setAutores("Phillippe Briones, Roger Stern ");
 		comic.setColor(Boolean.TRUE);
 		comic.setFechaVenta(LocalDate.now());
-		comic.setEstado("");
+		comic.setEstadoEnum(EstadoEnum.ACTIVO);
 		comic.setCantidad(200L);
 
 		// Adicionar el comic creado a la lista de comics
+		// Se valida primero que la lista este inicializada
 		if (listaComics == null) {
 			listaComics = new ArrayList<>();
 		}
+		// Se adiciona el nuevo elmento a la lista
 		listaComics.add(comic);
 	}
 

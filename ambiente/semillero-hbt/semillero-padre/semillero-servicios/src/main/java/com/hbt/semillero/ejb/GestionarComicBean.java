@@ -3,9 +3,12 @@
  */
 package com.hbt.semillero.ejb;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -30,64 +33,117 @@ public class GestionarComicBean implements IGestionarComicLocal {
 
 	/**
 	 * 
-	 * Metodo encargado de crear un nuevo comic con informacion por defecto
-	 * 
-	 * @author ccastano
-	 *
+	 * @see com.hbt.semillero.ejb.IGestionarComicLocal#crearComic(com.hbt.semillero.dto.ComicDTO)
 	 */
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void crearComic(ComicDTO comicNuevo) {
-		//Entidad nueva 
-		Comic comic = new Comic();
-		comic.setId(comicNuevo.getId());
-		//Se almacena la informacion y se maneja la enidad comic
-		em.persist(comicNuevo);
+		// Entidad nueva
+		Comic comic = convertirComicDTOToComic(comicNuevo);
+		// Se almacena la informacion y se maneja la enidad comic
+		em.persist(comic);
 	}
 
 	/**
 	 * 
-	 * Metodo encargado de cambiar el nombre a un comic con el mismo id
-	 * 
-	 * @author ccastano
-	 * 
-	 * @param comicModificar
+	 * @see com.hbt.semillero.ejb.IGestionarComicLocal#modificarComic(com.hbt.semillero.dto.ComicDTO)
 	 */
-	public void modificarComic(Comic comicModificar) {
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public void modificarComic(Long id, String nombre, ComicDTO comicNuevo) {
+		Comic comicModificar ;
+		if(comicNuevo==null) {
+			// Entidad a modificar
+			comicModificar = em.find(Comic.class, id);
+		}else {
+			comicModificar = convertirComicDTOToComic(comicNuevo);
+		}
+		comicModificar.setNombre(nombre);
 		em.merge(comicModificar);
 	}
 
 	/**
 	 * 
-	 * Metodo encargado de eliminar un elemento determinado de la lista de comic
-	 * 
-	 * @param comicEliminar
+	 * @see com.hbt.semillero.ejb.IGestionarComicLocal#eliminarComic(java.lang.Long)
 	 */
-	public void eliminarComic(Comic comicEliminar) {
-		em.remove(comicEliminar);
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public void eliminarComic(Long idComic) {
+		Comic comicEliminar = em.find(Comic.class, idComic);
+		if (comicEliminar != null) {
+			em.remove(comicEliminar);
+		}
 	}
 
 	/**
 	 * 
-	 * Metodo encargado de retornar un comic dado un id determinadao
-	 * 
-	 * @param idComic identificador del comic a ser buscado
-	 * @return comic encontrado
+	 * @see com.hbt.semillero.ejb.IGestionarComicLocal#consultarComic(java.lang.String)
 	 */
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public ComicDTO consultarComic(String idComic) {
 		Comic comic = null;
 		comic = new Comic();
 		comic = em.find(Comic.class, idComic);
-
-		ComicDTO comicDTO = new ComicDTO();
-		comicDTO.setId(comic.getId());
-		comicDTO.setNombre(comic.getNombre());
+		ComicDTO comicDTO = convertirComicToComicDTO(comic);
 		return comicDTO;
 	}
 
-	// Sobreescribir un metod, sobrecargar
-	public List<ComicDTO> consultarComic() {
-
-		List<Comic> resultados = (List<Comic>) em.createQuery("select c from Comic").getResultList();
-		return null;
+	/**
+	 * 
+	 * @see com.hbt.semillero.ejb.IGestionarComicLocal#consultarComics()
+	 */
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+	public List<ComicDTO> consultarComics() {
+		List<ComicDTO> resultadosComicDTO = new ArrayList<ComicDTO>();
+		List<Comic> resultados = em.createQuery("select c from Comic c").getResultList();
+		for (Comic comic:resultados) {
+			resultadosComicDTO.add(convertirComicToComicDTO(comic));
+		}
+		return resultadosComicDTO;
 	}
 
+	/**
+	 * 
+	 * Metodo encargado de transformar un comic a un comicDTO
+	 * 
+	 * @param comic
+	 * @return
+	 */
+	private ComicDTO convertirComicToComicDTO(Comic comic) {
+		ComicDTO comicDTO = new ComicDTO();
+		comicDTO.setId(comic.getId());
+		comicDTO.setNombre(comic.getNombre());
+		comicDTO.setEditorial(comic.getEditorial());
+		comicDTO.setTematicaEnum(comic.getTematicaEnum());
+		comicDTO.setColeccion(comic.getColeccion());
+		comicDTO.setNumeroPaginas(comic.getNumeroPaginas());
+		comicDTO.setPrecio(comic.getPrecio());
+		comicDTO.setAutores(comic.getAutores());
+		comicDTO.setColor(comic.getColor());
+		comicDTO.setFechaVenta(comic.getFechaVenta());
+		comicDTO.setEstadoEnum(comic.getEstadoEnum());
+		comicDTO.setCantidad(comic.getCantidad());
+		return comicDTO;
+	}
+
+	/**
+	 * 
+	 * Metodo encargado de transformar un comicDTO a un comic
+	 * 
+	 * @param comic
+	 * @return
+	 */
+	private Comic convertirComicDTOToComic(ComicDTO comicDTO) {
+		Comic comic = new Comic();
+		comic.setId(comic.getId());
+		comic.setNombre(comic.getNombre());
+		comic.setEditorial(comic.getEditorial());
+		comic.setTematicaEnum(comic.getTematicaEnum());
+		comic.setColeccion(comic.getColeccion());
+		comic.setNumeroPaginas(comic.getNumeroPaginas());
+		comic.setPrecio(comic.getPrecio());
+		comic.setAutores(comic.getAutores());
+		comic.setColor(comic.getColor());
+		comic.setFechaVenta(comic.getFechaVenta());
+		comic.setEstadoEnum(comic.getEstadoEnum());
+		comic.setCantidad(comic.getCantidad());
+		return comic;
+	}
 }

@@ -3,6 +3,8 @@
  */
 package com.hbt.semillero.rest;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -15,7 +17,8 @@ import com.hbt.semillero.dto.ComicDTO;
 import com.hbt.semillero.ejb.IGestionarComicLocal;
 
 /**
- * <b>Descripción:<b> Clase que determina <b>Caso de Uso:<b>
+ * <b>Descripción:<b> Clase que determina el servicio rest que permite gestionar
+ * un comic
  * 
  * @author ccastano
  * @version
@@ -33,6 +36,7 @@ public class GestionarComicRest {
 	 * 
 	 * Metodo encargado de traer la informacion de un comic determiando
 	 * http://localhost:8085/semillero-servicios/rest/GestionarComic/saludo
+	 * 
 	 * @param idComic
 	 * @return
 	 */
@@ -40,18 +44,35 @@ public class GestionarComicRest {
 	@Path("/saludo")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String primerRest() {
-		return "Prueba inicial servicios rest en el semillero - Hola Semillero";
+		return "Prueba inicial servicios rest en el semillero java hbt";
 	}
 
 	/**
 	 * 
 	 * Metodo encargado de traer la informacion de un comic determiando
 	 * http://localhost:8085/semillero-servicios/rest/GestionarComic/consultar?idComic=1
+	 * 
 	 * @param idComic
 	 * @return
 	 */
 	@GET
-	@Path("/consultar")
+	@Path("/consultarComics")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<ComicDTO> consultarComic() {
+		return gestionarComicEJB.consultarComics();
+
+	}
+
+	/**
+	 * 
+	 * Metodo encargado de traer la informacion de un comic determiando
+	 * http://localhost:8085/semillero-servicios/rest/GestionarComic/consultarComic?idComic=1
+	 * 
+	 * @param idComic
+	 * @return
+	 */
+	@GET
+	@Path("/consultarComic")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ComicDTO consultarComic(@QueryParam("idComic") Long idComic) {
 		if (idComic != null) {
@@ -74,13 +95,33 @@ public class GestionarComicRest {
 		gestionarComicEJB.crearComic(comicDTO);
 	}
 
-	// TODO
-	public void modificarComic() {
-
+	/**
+	 * 
+	 * Metodo encargado de modificar el nombre de un comic
+	 * http://localhost:8085/semillero-servicios/rest/GestionarComic/modificar?idComic=1&nombre=nuevonombre
+	 * @param idComic identificador del comic a buscar
+	 * @param nombre nombre nuevo del comic
+	 */
+	@POST
+	@Path("/modificar")
+	@Produces(MediaType.APPLICATION_JSON)
+	public void modificarComic(@QueryParam("idComic") Long idComic, @QueryParam("nombre") String nombre) {
+		gestionarComicEJB.modificarComic(idComic, nombre, null);
 	}
 
-	// TODO
-	public void eliminarComic() {
+	/**
+	 * 
+	 * Metodo encargado de eliminar un comic dado el id
+	 * 
+	 * @param idComic identificador del comic
+	 */
+	@POST
+	@Path("/eliminar")
+	@Produces(MediaType.APPLICATION_JSON)
+	public void eliminarComic(@QueryParam("idComic") Long idComic) {
+		if (idComic != null) {
+			ComicDTO comicDTO = gestionarComicEJB.consultarComic(idComic.toString());
 
+		}
 	}
 }
