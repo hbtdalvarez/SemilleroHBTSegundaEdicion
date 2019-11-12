@@ -1,12 +1,16 @@
 <div class="container">
-    <form>
+    <form [formGroup]="gestionarComicForm">
         <h1>Gestionar Comic</h1>
         <hr>
 
         <div class="row">
             <div class="col-6">
                 <label for="nombreComic">Nombre:</label>
-                <input type="text" class="form-control" id="nombreComic" name="nombre" [(ngModel)]="comic.nombre">
+                <input type="text" class="form-control" id="nombreComic" formControlName="nombre"
+                    [ngClass]="{ 'is-invalid': submitted && f.nombre.errors }">
+                <div *ngIf="submitted && f.nombre.errors">
+                    <span class="text-danger" *ngIf="f.nombre.errors.required">Campo requerido.</span>
+                </div>
             </div>
 
             <div class="col-6">
@@ -19,7 +23,7 @@
             <div class="col-6">
                 <div class="form-group">
                     <label for="tematica">Tematica:</label>
-                    <select class="form-control" id="tematica">
+                    <select class="form-control" id="tematica" formControlName="tematica">
                         <option value="AVENTURAS">AVENTURAS</option>
                         <option value="BELICO">BELICO</option>
                         <option value="DEPORTIVO">DEPORTIVO</option>
@@ -58,11 +62,13 @@
                 <label for="color">A color:</label>
                 <br>
                 <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
+                    <input type="radio" id="customRadioInline1" class="custom-control-input"
+                        formControlName="color" value="true">
                     <label class="custom-control-label" for="customRadioInline1">Si</label>
                 </div>
                 <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+                    <input type="radio" id="customRadioInline2"  class="custom-control-input"
+                        formControlName="color" value="false">
                     <label class="custom-control-label" for="customRadioInline2">No</label>
                 </div>
             </div>
@@ -73,12 +79,12 @@
                 <span></span>
             </div>
             <div class="col-6 text-right">
-                <button type="button" class="btn btn-primary">Crear/Editar</button>
+                <button type="button" class="btn btn-primary" (click)="crearActualizarComic()">Crear/Editar</button>
             </div>
         </div>
 
         <br>
-        <div class="row">
+        <div class="row" *ngIf="true">
             <div class="col-12">
                 <table class="table">
                     <thead>
@@ -92,16 +98,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Batman</td>
+                        <!--date:"MM/dd/yy"
+                        | uppercase-->
+                        <tr *ngFor="let comic of listaComics;let i=index;">
+                            <th scope="row">{{comic.id}}</th>
+                            <td>{{comic.nombre | lowercase }}</td>
                             <td>Horror</td>
-                            <td>65000</td>
+                            <td>{{65000 | number: '.2'}}</td>
                             <td>Si</td>
                             <td>
-                                <i class="fas fa-search 2x ml-1" title="Consultar"></i>
-                                <i class="fas fa-pencil-alt 2x ml-1" title="Editar"></i>
-                                <i class="far fa-times-circle 2x ml-1" title="Eliminar"></i>
+                                <i class="fas fa-search 2x ml-1" (click)="consultarComic(i)" title="Consultar"></i>
+                                <i class="fas fa-pencil-alt 2x ml-1"  [routerLink]="['/bienvenida',{id:1,nombre:'asasd'}]" title="Editar"></i>
+                                <i class="far fa-times-circle 2x ml-1" (click)="editarComic()" title="Eliminar"></i>
                             </td>
                         </tr>
                     </tbody>
