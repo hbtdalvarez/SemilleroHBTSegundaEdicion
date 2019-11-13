@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
+import {EjemploService} from '../../services/ejemplo.service';
+
 /**
  * @description Componente bienvenida, el cual contiene la imagen de bienvenida al semillero
  * 
@@ -14,7 +16,7 @@ export class BienvenidaComponent implements OnInit {
   
   public urlImagen : string;
   
-  constructor(private router : Router, private activatedRoute: ActivatedRoute) {
+  constructor(private router : Router, private activatedRoute: ActivatedRoute, private ejemploService: EjemploService) {
     console.log("entro al constructor del componente bienvenida");
   }
 
@@ -23,7 +25,7 @@ export class BienvenidaComponent implements OnInit {
     let data = this.activatedRoute.snapshot.params;
     
     console.log("Parametros recibidos " + data);
-    
+    this.ejemploService.saludo();
   }
 
   public ejecucionEventoClick( parametroEvento : any, numero : number ) : void {

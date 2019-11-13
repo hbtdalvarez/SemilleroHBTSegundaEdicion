@@ -6,6 +6,7 @@ package com.hbt.semillero.rest;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -14,6 +15,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import com.hbt.semillero.dto.ComicDTO;
+import com.hbt.semillero.dto.ResultadoDTO;
 import com.hbt.semillero.ejb.IGestionarComicLocal;
 
 /**
@@ -50,7 +52,7 @@ public class GestionarComicRest {
 	/**
 	 * 
 	 * Metodo encargado de traer la informacion de un comic determiando
-	 * http://localhost:8085/semillero-servicios/rest/GestionarComic/consultar?idComic=1
+	 * http://localhost:8085/semillero-servicios/rest/GestionarComic/consultarComics
 	 * 
 	 * @param idComic
 	 * @return
@@ -84,15 +86,19 @@ public class GestionarComicRest {
 
 	/**
 	 * Crea las personas en sus diferentes roles dentro del sistema.
-	 * 
+	 * http://localhost:8085/semillero-servicios/rest/GestionarComic/crear
 	 * @param persona
 	 * @return
 	 */
 	@POST
 	@Path("/crear")
 	@Produces(MediaType.APPLICATION_JSON)
-	public void crearComic(ComicDTO comicDTO) {
+	@Consumes(MediaType.APPLICATION_JSON)
+	public ResultadoDTO crearComic(ComicDTO comicDTO) {
 		gestionarComicEJB.crearComic(comicDTO);
+		ResultadoDTO resultadoDTO = new ResultadoDTO(Boolean.TRUE, "Comic creado exitosamente");
+		return resultadoDTO;
+		
 	}
 
 	/**

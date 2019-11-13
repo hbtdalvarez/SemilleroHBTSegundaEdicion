@@ -17,6 +17,11 @@ import { GestionarComicComponent } from './semillero/componentes/gestionarComic/
 export { ComicDTO } from './semillero/dto/comic.dto';
 export { ResultadoDTO } from './semillero/dto/resultado.dto';
 
+//Manejo de servicios
+
+import {EjemploService} from './semillero/services/ejemplo.service';
+import {AbstractService} from './semillero/services/template.service';
+
 @NgModule({
   declarations: [
     AppComponent,

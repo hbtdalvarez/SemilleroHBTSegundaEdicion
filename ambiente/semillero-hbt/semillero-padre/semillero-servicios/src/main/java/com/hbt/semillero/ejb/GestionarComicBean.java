@@ -9,6 +9,8 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -23,6 +25,7 @@ import com.hbt.semillero.entidad.Comic;
  * @version
  */
 @Stateless
+@TransactionManagement(TransactionManagementType.CONTAINER)
 public class GestionarComicBean implements IGestionarComicLocal {
 
 	/**
@@ -35,7 +38,7 @@ public class GestionarComicBean implements IGestionarComicLocal {
 	 * 
 	 * @see com.hbt.semillero.ejb.IGestionarComicLocal#crearComic(com.hbt.semillero.dto.ComicDTO)
 	 */
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void crearComic(ComicDTO comicNuevo) {
 		// Entidad nueva
 		Comic comic = convertirComicDTOToComic(comicNuevo);
@@ -80,7 +83,7 @@ public class GestionarComicBean implements IGestionarComicLocal {
 	public ComicDTO consultarComic(String idComic) {
 		Comic comic = null;
 		comic = new Comic();
-		comic = em.find(Comic.class, idComic);
+		comic = em.find(Comic.class, Long.parseLong(idComic));
 		ComicDTO comicDTO = convertirComicToComicDTO(comic);
 		return comicDTO;
 	}
@@ -108,7 +111,9 @@ public class GestionarComicBean implements IGestionarComicLocal {
 	 */
 	private ComicDTO convertirComicToComicDTO(Comic comic) {
 		ComicDTO comicDTO = new ComicDTO();
-		comicDTO.setId(comic.getId());
+		if(comic.getId()!=null) {
+		 comicDTO.setId(comic.getId().toString());
+		}
 		comicDTO.setNombre(comic.getNombre());
 		comicDTO.setEditorial(comic.getEditorial());
 		comicDTO.setTematicaEnum(comic.getTematicaEnum());
@@ -132,18 +137,20 @@ public class GestionarComicBean implements IGestionarComicLocal {
 	 */
 	private Comic convertirComicDTOToComic(ComicDTO comicDTO) {
 		Comic comic = new Comic();
-		comic.setId(comic.getId());
-		comic.setNombre(comic.getNombre());
-		comic.setEditorial(comic.getEditorial());
-		comic.setTematicaEnum(comic.getTematicaEnum());
-		comic.setColeccion(comic.getColeccion());
-		comic.setNumeroPaginas(comic.getNumeroPaginas());
-		comic.setPrecio(comic.getPrecio());
-		comic.setAutores(comic.getAutores());
-		comic.setColor(comic.getColor());
-		comic.setFechaVenta(comic.getFechaVenta());
-		comic.setEstadoEnum(comic.getEstadoEnum());
-		comic.setCantidad(comic.getCantidad());
+		if(comicDTO.getId()!=null) {
+			comic.setId(Long.parseLong(comicDTO.getId()));
+		}
+		comic.setNombre(comicDTO.getNombre());
+		comic.setEditorial(comicDTO.getEditorial());
+		comic.setTematicaEnum(comicDTO.getTematicaEnum());
+		comic.setColeccion(comicDTO.getColeccion());
+		comic.setNumeroPaginas(comicDTO.getNumeroPaginas());
+		comic.setPrecio(comicDTO.getPrecio());
+		comic.setAutores(comicDTO.getAutores());
+		comic.setColor(comicDTO.getColor());
+		comic.setFechaVenta(comicDTO.getFechaVenta());
+		comic.setEstadoEnum(comicDTO.getEstadoEnum());
+		comic.setCantidad(comicDTO.getCantidad());
 		return comic;
 	}
 }
