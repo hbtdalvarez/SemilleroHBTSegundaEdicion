@@ -24,13 +24,8 @@ export class BienvenidaComponent implements OnInit {
     this.urlImagen = "https://www.elempleo.com/sitios-empresariales/colombia/heinsohn-business-technology/img/elempleo-02.jpg";
     let data = this.activatedRoute.snapshot.params;
     
-<<<<<<< HEAD
-    console.log("Parametros recibidos " + JSON.stringify(data));
-    
-=======
     console.log("Parametros recibidos " + data);
     this.ejemploService.saludo();
->>>>>>> a7f57bab836eb2249b08d632e9036764ab7e9cb5
   }
 
   public ejecucionEventoClick( parametroEvento : any, numero : number ) : void {
