@@ -6,7 +6,6 @@ import { BienvenidaComponent } from './semillero/componentes/home/bienvenida-com
 const routes: Routes = [
   { path: 'gestionar-comic', component: GestionarComicComponent },
   { path: 'bienvenida', component: BienvenidaComponent, data : null }
-  
 ];
 
 @NgModule({
