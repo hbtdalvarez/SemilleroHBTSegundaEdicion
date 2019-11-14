@@ -11,7 +11,7 @@ import { HttpClient, HttpParams } from "@angular/common/http"
 export class AbstractService  {
 
     private http: HttpClient;
-    private headers = { 'Content-Type': 'application/json; charset=UTF-8' };
+    private headers = { 'Access-Control-Allow-Origin': '*' };
 	
     constructor(injector: Injector) {
         
